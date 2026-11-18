@@ -1,0 +1,19 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: practica-s12
+  labels:
+    app.kubernetes.io/name: app-backend
+    app.kubernetes.io/part-of: practica-s12
+data:
+  APP_ENV: "aws-lab"
+  # Puerto > 1024: un proceso NO root no puede abrir puertos privilegiados (<1024).
+  APP_PORT: "8080"
+  # Nombre DNS del Service de la base de datos (ver 04-app-service.yaml).
+  # Dentro del namespace basta el nombre corto del Service.
+  DB_HOST: "redis-service"
+  # Debe coincidir con `spec.ports[].port` del Service de la base de datos.
+  DB_PORT: "6379"
+  DB_TIMEOUT_SECONDS: "2"
